@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Assignment-3</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h2 class="heading">Book an Appointment</h2>
+            <input type="date" class="appointment_date" id="inputdate">
+            <div class="times">
+                <p class="appointment">09:00 AM</p>
+                <p class="appointment">10:00 AM</p>
+                <p class="appointment">11:00 AM</p>
+                <p class="appointment">12:00 AM</p>
+                <p class="appointment">01:00 PM</p>
+                <p class="appointment">02:00 PM</p>
+                <p class="appointment">03:00 PM</p>
+                <p class="appointment">04:00 PM</p>
+            </div>
+            <h3 class="appointment_list_heading">Your Appointments</h3>
+            <ul class="appointed_list" id="list"></ul>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const input_date = document.getElementById("inputdate");
+            const appointmentLIST = document.getElementById("list");
+            const time = document.querySelector(".times");
+            let bookedAppointments = {};
+
+            input_date.addEventListener("change", function () {
+                time.style.display = "flex";
+
+                document.querySelectorAll(".appointment").forEach(slot => {
+                    slot.style.backgroundColor = "blue";
+                });
+            });
+
+            document.querySelectorAll(".appointment").forEach(slot => {
+                slot.addEventListener("click", function () {
+                    const selectedDate = input_date.value;
+                    const selectedTime = this.innerText;
+
+                    if (!bookedAppointments[selectedDate]) {
+                        bookedAppointments[selectedDate] = new Set();
+                    }
+
+                    if (bookedAppointments[selectedDate].has(selectedTime)) {
+                        alert(`The time slot ${selectedTime} is already booked on ${selectedDate}.`);
+                        return;
+                    }
+
+                    const confirmation = confirm(`Do you want to book ${selectedDate} at ${selectedTime}?`);
+                    if (confirmation) {
+                        this.style.backgroundColor = "red";
+                        bookedAppointments[selectedDate].add(selectedTime);
+
+                        const item = document.createElement("li");
+                        item.innerHTML = `<span>${selectedDate} - ${selectedTime}</span>`;
+
+                        const deleteButton = document.createElement("button");
+                        deleteButton.innerText = "Delete";
+                        deleteButton.classList.add("delete-btn");
+
+                        deleteButton.addEventListener("click", function () {
+                            bookedAppointments[selectedDate].delete(selectedTime);
+                            slot.style.backgroundColor = "blue";
+                            item.remove();
+                        });
+
+                        item.appendChild(deleteButton);
+                        appointmentLIST.appendChild(item);
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

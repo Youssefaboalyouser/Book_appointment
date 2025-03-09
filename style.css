@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(155 171 166);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 800px;
+    padding: 20px;
+}
+
+.card .heading {
+    margin: 10px 238px;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.card .appointment_date {
+    margin: 0 307px 10px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.times{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: none;
+}
+.times p{
+    background-color: blue;
+    border-radius: 5px;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.card .appointment_list_heading{
+    font-size: 27px;
+    margin: 10px 0;
+    padding: 10px 10px 10px 0;
+}
+ul li{
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    background-color: #c4bebe;
+    padding: 10px;
+    margin: 5px 0;
+}
+.delete-btn{
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+}
+.delete-btn:hover{
+    background-color: darkred;
+}
